@@ -33,11 +33,9 @@ To run this project, you will need to add the following environment variables to
 Create a folder and open terminal and install this project by
 command 
 ```bash
-git clone https://github.com/Mr-Atanu-Roy/myDownloader
-
+https://github.com/Aritra-Mondal-ICS/My-Downloader.git
 ```
-or simply download this project from https://github.com/Mr-Atanu-Roy/myDownloader
-
+or simply download this project from https://github.com/Aritra-Mondal-ICS/My-Downloader.git
 In project directory Create a virtual environment(say env)
 
 ```bash
@@ -78,5 +76,5 @@ Then go to http://127.0.0.1:8000 in your browser to see the project
 
 ## Author
 
-- [@Mr-Atanu-Roy](https://www.github.com/Mr-Atanu-Roy)
+- [@Aritra-Mondal-ICS](https://github.com/Aritra-Mondal-ICS)
 
