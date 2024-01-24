@@ -1,0 +1,92 @@
+{% extends './blocks/base.html' %} 
+
+{% block title %}Online Video Downloader - Download Your Favorite Videos{% endblock title %} 
+
+
+{% block body %}
+
+<section class="section px-12" style="min-height:100vh">
+    <div class="flex-col justify-center items-center">
+        <div class="text-center w-full">
+            <h1 class="text-4xl capitalize my-3 font-semibold">Youtube downloader</h1>
+            <h3 class="text-xl font-medium">Download your favorite youtube videos in mp4 format or extract audio from them</h3>
+        </div>
+        <form action="" method="post" class="w-full flex justify-center items-start my-16">
+            {% csrf_token %} 
+            <div class="w-2/3 mr-8">
+                <input type="url" name="url" id="url" class="w-full px-1 py-2 h-14 border-2 border-solid border-red-300 focus:border-red-500 hover:border-red-500 rounded-lg outline-none transition duration-300 ease-in-out" placeholder="Paste the link of YouTube video to download it" value="{{url}}" required>
+                <p class="text-sm mt-1 ml-1 font-medium text-red-600 capitalize">{{error}}</p>
+            </div>
+            <button type="submit" class="inline-block px-7 py-5 bg-red-600 text-white font-medium text-base leading-tight uppercase rounded-lg transition duration-300 ease-in-out hover:bg-gray-800 outline-none hover:shadow-md">Download</button>
+        </form>
+    </div>
+    {% if url != "" and channel != "" and title != "" and description != "" and duration != "" and thumbnail != "" %}
+    <div class="w-full my-10 flex justify-center items-center">
+        <div class="bg-red-200 p-12 flex justify-center items-center w-fit rounded-lg">
+            <div class="mr-14" style="width: 24vw;">
+                <a href="{{url}}" target="_blank"><img src="{{thumbnail}}" alt="" class="rounded-lg shadow-lg"></a>
+            </div>
+            <div class="flex-col justify-start items-center">
+                <!-- <h3 class="text-xl font-bold mb-3 block uppercase">video downloaded successfully</h3> -->
+                <h3 class="text-lg font-medium my-1.5 block">{{title}}</h3>
+                <h3 class="text-base font-light my-1.5 block">{{channel | title}}</h3>
+                <h3 class="text-base font-light my-1.5 block">{{duration}} seconds</h3>
+                <div class="mt-4">
+                    <form action="download/yt" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="videoURL" value="{{url}}" style="display: none;">
+                        <select name="videoType" id="videoType" class="my-2 py-1.5 px-3 text-base w-1/2 block rounded outline-none bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out mb-4" required>
+                            <option value="video" selected>Download Video (MP4)</option>
+                            <option value="audio">Download Audio</option>
+                        </select>
+                        <button type="submit" id="yt-download" class="inline-block px-5 py-4 bg-red-600 text-white font-medium text-sm leading-tight uppercase rounded-lg transition duration-300 ease-in-out hover:bg-gray-800 outline-none hover:shadow-md">Download</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if messages%}
+    <div class="flex justify-center items-center mt-24">
+        <div class="rounded-full h-32 w-32 bg-green-300 flex justify-center items-center text-center font-bold text-6xl">
+            <i class="fa fa-check "></i>
+        </div>
+        <p class="text-2xl capitalize font-bold ml-4">
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+        </p>
+    </div>
+    {% endif %}
+
+    <div class="w-full grid grid-cols-3 gap-4 my-28">
+        <div class="w-full flex justify-start items-center">
+            <div class="rounded-full bg-blue-200 h-20 w-20 flex justify-center items-center text-center font-bold text-2xl transition duration-300 ease-in-out hover:bg-blue-300">1</div>
+            <p class="w-4/5 ml-3">Paste the YouTube video url in the above input box and click download</p>
+        </div>
+        <div class="w-full flex justify-start items-center">
+            <div class="rounded-full bg-red-200 h-20 w-20 flex justify-center items-center text-center font-bold text-2xl transition duration-300 ease-in-out hover:bg-red-300">2</div>
+            <p class="w-4/5 ml-3">A box will appear where you have to choose audio/video and click download button on that box</p>
+        </div>
+        <div class="w-full flex justify-start items-center">
+            <div class="rounded-full bg-yellow-200 h-20 w-20 flex justify-center items-center text-center font-bold text-2xl transition duration-300 ease-in-out hover:bg-yellow-300">3</div>
+            <p class="w-4/5 ml-3">Wait for sometime till the video gets downloaded and the detail box disappears</p>
+        </div>
+    </div>
+</section>
+
+
+{% block js %}
+
+<script>
+    $(document).ready(function () {
+        $("#yt-download").click(function (e) { 
+            $("#yt-download").text("DOWNLOADING....");
+         });    
+    });
+</script>
+
+{% endblock js %}
+
+{% endblock body %}

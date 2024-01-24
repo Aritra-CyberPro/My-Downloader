@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/307192de7c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    {% include './header.html' %}
+    
+    {% block body %}
+    {% endblock body %}
+
+    {% include './footer.html' %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    {% block js %}{% endblock js %}
+</body>
+</html>
+
+
+
+
+
